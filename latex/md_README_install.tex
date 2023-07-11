@@ -1,0 +1,52 @@
+\hypertarget{md_README_install_autotoc_md21}{}\doxysection{How to install VCPKG}\label{md_README_install_autotoc_md21}
+Official Link\+: \href{https://vcpkg.io/en/index.html}{\texttt{ https\+://vcpkg.\+io/en/index.\+html}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd external}
+\DoxyCodeLine{git clone https://github.com/Microsoft/vcpkg.git}
+\DoxyCodeLine{.\(\backslash\)vcpkg\(\backslash\)bootstrap-\/vcpkg.bat \# windows}
+\DoxyCodeLine{./vcpkg/bootstrap-\/vcpkg.sh \# Unix}
+
+\end{DoxyCode}
+\hypertarget{md_README_install_autotoc_md22}{}\doxysection{How to install the Conan Package Manager}\label{md_README_install_autotoc_md22}
+Official installation guide is \href{https://docs.conan.io/2/}{\texttt{ here}}.
+
+The conan database is \href{https://conan.io/center/}{\texttt{ here}}.\hypertarget{md_README_install_autotoc_md23}{}\doxysubsection{Installation Steps}\label{md_README_install_autotoc_md23}
+
+\begin{DoxyEnumerate}
+\item Install Python (3.\+7+)
+\item Type {\ttfamily pip install -\/-\/user -\/U conan} into the terminal
+\begin{DoxyEnumerate}
+\item Unix\+: Append conan to the PATH by\+: {\ttfamily source $\sim$/.profile}
+\end{DoxyEnumerate}
+\item Run the conan command\+: {\ttfamily conan}
+\item conan profile detect --force
+\item conan profile path default
+\end{DoxyEnumerate}\hypertarget{md_README_install_autotoc_md24}{}\doxysection{Formatter and Static Analyzer}\label{md_README_install_autotoc_md24}
+\hypertarget{md_README_install_autotoc_md25}{}\doxysubsection{Tooling}\label{md_README_install_autotoc_md25}
+Clang-\/\+Format\+: Formatting tool for your C/\+C++ code\+:
+
+
+\begin{DoxyItemize}
+\item Documentation for Clang-\/\+Format\+: \href{https://clang.llvm.org/docs/ClangFormat.html}{\texttt{ Link}}
+\end{DoxyItemize}
+
+Clang-\/\+Tidy\+: Static linting tool for your C/\+C++ code\+:
+
+
+\begin{DoxyItemize}
+\item Documentation for Clang-\/\+Tidy\+: \href{https://clang.llvm.org/extra/clang-tidy/}{\texttt{ Link}}
+\end{DoxyItemize}
+
+Cmake-\/\+Format\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{pip install cmake-\/format \# python 3.7+}
+
+\end{DoxyCode}
+\hypertarget{md_README_install_autotoc_md26}{}\doxysubsection{Install Clang Tools}\label{md_README_install_autotoc_md26}
+It\textquotesingle{}s included in the LLVM toolchain, but also installable by apt, brew, winget etc.
+
+\href{https://github.com/llvm/llvm-project/releases/tag/llvmorg-16.0.0}{\texttt{ https\+://github.\+com/llvm/llvm-\/project/releases/tag/llvmorg-\/16.\+0.\+0}} 

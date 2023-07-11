@@ -1,0 +1,121 @@
+\hypertarget{md_README_cmake_autotoc_md5}{}\doxysection{Generating a Project}\label{md_README_cmake_autotoc_md5}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cmake [<options>] -\/S <path-\/to-\/source> -\/B <path-\/to-\/build>}
+
+\end{DoxyCode}
+
+
+Assuming that a CMake\+Lists.\+txt is in the root directory, you can generate a project like the following.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{mkdir build}
+\DoxyCodeLine{cd build}
+\DoxyCodeLine{cmake -\/S .. -\/B . \# Option 1}
+\DoxyCodeLine{cmake .. \# Option 2}
+
+\end{DoxyCode}
+
+
+Assuming that you have already built the CMake project, you can update the generated project.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd build}
+\DoxyCodeLine{cmake .}
+
+\end{DoxyCode}
+\hypertarget{md_README_cmake_autotoc_md6}{}\doxysection{Generator for GCC and Clang}\label{md_README_cmake_autotoc_md6}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd build}
+\DoxyCodeLine{cmake -\/S .. -\/B . -\/G "{}Unix Makefiles"{} \# Option 1}
+\DoxyCodeLine{cmake .. -\/G "{}Unix Makefiles"{} \# Option 2}
+
+\end{DoxyCode}
+\hypertarget{md_README_cmake_autotoc_md7}{}\doxysection{Generator for MSVC}\label{md_README_cmake_autotoc_md7}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd build}
+\DoxyCodeLine{cmake -\/S .. -\/B . -\/G "{}Visual Studio 16 2019"{} \# Option 1}
+\DoxyCodeLine{cmake .. -\/G "{}Visual Studio 16 2019"{} \# Option 2}
+
+\end{DoxyCode}
+\hypertarget{md_README_cmake_autotoc_md8}{}\doxysection{Specify the Build Type}\label{md_README_cmake_autotoc_md8}
+Per default, the standard type is in most cases the debug type. If you want to generate the project, for example, in release mode you have to set the build type.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd build}
+\DoxyCodeLine{cmake -\/DCMAKE\_BUILD\_TYPE=Release ..}
+
+\end{DoxyCode}
+\hypertarget{md_README_cmake_autotoc_md9}{}\doxysection{Passing Options}\label{md_README_cmake_autotoc_md9}
+If you have set some options in the CMake\+Lists, you can pass values in the command line.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd build}
+\DoxyCodeLine{cmake -\/DMY\_OPTION=[ON|OFF] ..}
+
+\end{DoxyCode}
+\hypertarget{md_README_cmake_autotoc_md10}{}\doxysection{Specify the Build Target (\+Option 1)}\label{md_README_cmake_autotoc_md10}
+The standard build command would build all created targets within the CMake\+Lists. If you want to build a specific target, you can do so.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd build}
+\DoxyCodeLine{cmake -\/-\/build . -\/-\/target ExternalLibraries\_Executable}
+
+\end{DoxyCode}
+
+
+The target {\itshape External\+Libraries\+\_\+\+Executable} is just an example of a possible target name. Note\+: All dependent targets will be built beforehand.\hypertarget{md_README_cmake_autotoc_md11}{}\doxysection{Specify the Build Target (\+Option 2)}\label{md_README_cmake_autotoc_md11}
+Besides setting the target within the cmake build command, you could also run the previously generated Makefile (from the generating step). If you want to build the {\itshape External\+Libraries\+\_\+\+Executable}, you could do the following.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd build}
+\DoxyCodeLine{make ExternalLibraries\_Executable}
+
+\end{DoxyCode}
+\hypertarget{md_README_cmake_autotoc_md12}{}\doxysection{Run the Executable}\label{md_README_cmake_autotoc_md12}
+After generating the project and building a specific target you might want to run the executable. In the default case, the executable is stored in {\itshape build/5\+\_\+\+External\+Libraries/app/\+External\+Libraries\+\_\+\+Executable}, assuming that you are building the project {\itshape 5\+\_\+\+External\+Libraries} and the main file of the executable is in the {\itshape app} dir.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd build}
+\DoxyCodeLine{./bin/ExternalLibraries\_Executable}
+
+\end{DoxyCode}
+\hypertarget{md_README_cmake_autotoc_md13}{}\doxysection{Different Linking Types}\label{md_README_cmake_autotoc_md13}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{target\_link\_libraries(A PUBLIC fmt)}
+\DoxyCodeLine{target\_link\_libraries(B PRIVATE spdlog)}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{target\_link\_libraries(C PUBLIC/PRIVATE A)}
+\DoxyCodeLine{target\_link\_libraries(C PUBLIC/PRIVATE B)}
+
+\end{DoxyCode}
+\hypertarget{md_README_cmake_autotoc_md14}{}\doxysubsection{PUBLIC}\label{md_README_cmake_autotoc_md14}
+When A links fmt as {\itshape PUBLIC}, it says that A uses fmt in its implementation, and fmt is also used in A\textquotesingle{}s public API. Hence, C can use fmt since it is part of the public API of A.\hypertarget{md_README_cmake_autotoc_md15}{}\doxysubsection{PRIVATE}\label{md_README_cmake_autotoc_md15}
+When B links spdlog as {\itshape PRIVATE}, it is saying that B uses spdlog in its implementation, but spdlog is not used in any part of B\textquotesingle{}s public API.\hypertarget{md_README_cmake_autotoc_md16}{}\doxysubsection{INTERFACE}\label{md_README_cmake_autotoc_md16}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{add\_library(D INTERFACE)}
+\DoxyCodeLine{target\_include\_directories(D INTERFACE \{CMAKE\_CURRENT\_SOURCE\_DIR\}/include)}
+
+\end{DoxyCode}
+
+
+In general, used for header-\/only libraries.\hypertarget{md_README_cmake_autotoc_md17}{}\doxysection{Different Library Types}\label{md_README_cmake_autotoc_md17}
+\hypertarget{md_README_cmake_autotoc_md18}{}\doxysubsection{Shared}\label{md_README_cmake_autotoc_md18}
+Shared libraries reduce the amount of code that is duplicated in each program that makes use of the library, keeping the binaries small. It also allows you to replace the shared object with one that is functionally equivalent, without needing to recompile the program that makes use of it. Shared libraries will however have a small additional cost for the execution.\hypertarget{md_README_cmake_autotoc_md19}{}\doxysubsection{Static}\label{md_README_cmake_autotoc_md19}
+Static libraries increase the overall size of the binary, but it means that you don\textquotesingle{}t need to carry along a copy of the library that is being used. As the code is connected at compile time there are not any additional run-\/time loading costs. The code is simply there. 

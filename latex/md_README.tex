@@ -1,0 +1,128 @@
+   \href{https://codecov.io/gh/franneck94/CppProjectTemplate}{\texttt{ }}
+
+This is a template for C++ projects. What you get\+:
+
+
+\begin{DoxyItemize}
+\item Library, executable and test code separated in distinct folders
+\item Use of modern CMake for building and compiling
+\item External libraries installed and managed by
+\begin{DoxyItemize}
+\item \href{https://github.com/cpm-cmake/CPM.cmake}{\texttt{ CPM}} Package Manager OR
+\item \href{https://conan.io/}{\texttt{ Conan}} Package Manager OR
+\item \href{https://github.com/microsoft/vcpkg}{\texttt{ VCPKG}} Package Manager
+\end{DoxyItemize}
+\item Unit testing using \href{https://github.com/catchorg/Catch2}{\texttt{ Catch2}} v2
+\item General purpose libraries\+: \href{https://github.com/nlohmann/json}{\texttt{ JSON}}, \href{https://github.com/gabime/spdlog}{\texttt{ spdlog}}, \href{https://github.com/jarro2783/cxxopts}{\texttt{ cxxopts}} and \href{https://github.com/fmtlib/fmt}{\texttt{ fmt}}
+\item Continuous integration testing with Github Actions and \href{https://pre-commit.com/}{\texttt{ pre-\/commit}}
+\item Code coverage reports, including automatic upload to \href{https://codecov.io}{\texttt{ Codecov}}
+\item Code documentation with \href{https://doxygen.nl/}{\texttt{ Doxygen}} and \href{https://franneck94.github.io/CppProjectTemplate/}{\texttt{ Github Pages}}
+\item Tooling\+: Clang-\/\+Format, Cmake-\/\+Format, Clang-\/tidy, Sanitizers
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md1}{}\doxysection{Structure}\label{md_README_autotoc_md1}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{├── CMakeLists.txt}
+\DoxyCodeLine{├── app}
+\DoxyCodeLine{│   ├── CMakesLists.txt}
+\DoxyCodeLine{│   └── main.cc}
+\DoxyCodeLine{├── cmake}
+\DoxyCodeLine{│   └── cmake modules}
+\DoxyCodeLine{├── docs}
+\DoxyCodeLine{│   ├── Doxyfile}
+\DoxyCodeLine{│   └── html/}
+\DoxyCodeLine{├── external}
+\DoxyCodeLine{│   ├── CMakesLists.txt}
+\DoxyCodeLine{│   ├── ...}
+\DoxyCodeLine{├── src}
+\DoxyCodeLine{│   ├── CMakesLists.txt}
+\DoxyCodeLine{│   ├── my\_lib.h}
+\DoxyCodeLine{│   └── my\_lib.cc}
+\DoxyCodeLine{└── tests}
+\DoxyCodeLine{    ├── CMakeLists.txt}
+\DoxyCodeLine{    └── main.cc}
+
+\end{DoxyCode}
+
+
+Library code goes into \href{src/}{\texttt{ src/}}, main program code in \mbox{[}app/\mbox{]}(app) and tests go in \href{tests/}{\texttt{ tests/}}.\hypertarget{md_README_autotoc_md2}{}\doxysection{Software Requirements}\label{md_README_autotoc_md2}
+
+\begin{DoxyItemize}
+\item CMake 3.\+21+
+\item GNU Makefile
+\item Doxygen
+\item Conan or VCPKG
+\item MSVC 2017 (or higher), G++9 (or higher), Clang++9 (or higher)
+\item Optional\+: Code Coverage (only on GNU$\vert$\+Clang)\+: lcov, gcovr
+\item Optional\+: Makefile, Doxygen, Conan, VCPKG
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md3}{}\doxysection{Building}\label{md_README_autotoc_md3}
+First, clone this repo and do the preliminary work\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{git clone -\/-\/recursive https://github.com/franneck94/CppProjectTemplate}
+\DoxyCodeLine{make prepare}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item App Executable
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd build}
+\DoxyCodeLine{cmake -\/DCMAKE\_BUILD\_TYPE=Release ..}
+\DoxyCodeLine{cmake -\/-\/build . -\/-\/config Release -\/-\/target main}
+\DoxyCodeLine{cd app}
+\DoxyCodeLine{./main}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item Unit testing
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd build}
+\DoxyCodeLine{cmake -\/DCMAKE\_BUILD\_TYPE=Debug ..}
+\DoxyCodeLine{cmake -\/-\/build . -\/-\/config Debug -\/-\/target unit\_tests}
+\DoxyCodeLine{cd tests}
+\DoxyCodeLine{./unit\_tests}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item Documentation
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd build}
+\DoxyCodeLine{cmake -\/DCMAKE\_BUILD\_TYPE=Debug ..}
+\DoxyCodeLine{cmake -\/-\/build . -\/-\/config Debug -\/-\/target docs}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item Code Coverage (Unix only)
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd build}
+\DoxyCodeLine{cmake -\/DCMAKE\_BUILD\_TYPE=Debug -\/DENABLE\_COVERAGE=ON ..}
+\DoxyCodeLine{cmake -\/-\/build . -\/-\/config Debug -\/-\/target coverage}
+
+\end{DoxyCode}
+
+
+For more info about CMake see /media/daniel/\+Date2/\+Alte Documente/\+Dani/\+Programare/\+Udemy/\+Cpp\+Project\+Template/\+README\+\_\+cmake.\+md \char`\"{}here\char`\"{}. 
